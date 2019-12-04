@@ -1,0 +1,23 @@
+select * from student;
+
+select *from  clazz;
+ 
+select * from course;
+
+select * from scores ;
+
+1.查询出山东省 每个学生的平均分。（展示班级，学生姓名，平均分）
+
+select s.name,cl.name,AVG(sc.score)  from student s LEFT JOIN scores sc on s.id=sc.sid LEFT JOIN clazz cl on cl.id= s.clazzId where s.sheng='山东省' GROUP BY s.id;
+
+2.查询java班的语文平均分降序排列。    （展示班级，学生姓名，平均分）
+select s.name,cl.name,AVG(sc.score)  from student s LEFT JOIN scores sc on s.id=sc.sid LEFT JOIN clazz cl on cl.id= s.clazzId  LEFT JOIN course co on sc.coid=co.id where co.name='语文' and cl.name='java班' GROUP BY s.id DESC;
+
+
+3.查询出平均分大于90分的同学 降序排序。 （展示班级，学生姓名，平均分）
+select s.name,cl.name,AVG(sc.score)  from student s LEFT JOIN scores sc on s.id=sc.sid LEFT JOIN clazz cl on cl.id= s.clazzId  LEFT JOIN course co on sc.coid=co.id where co.name='语文' GROUP BY s.id DESC HAVING AVG(sc.score)>90 ;
+
+查询出语文平均分 大于90的班级。（展示班级，平均分）
+select s.name,cl.name,AVG(sc.score)  from student s LEFT JOIN scores sc on s.id=sc.sid LEFT JOIN clazz cl on cl.id= s.clazzId  LEFT JOIN course co on sc.coid=co.id where co.name='语文' GROUP BY s.id DESC HAVING AVG(sc.score)>90;
+
+
